@@ -1,1 +1,3 @@
-Example Java web application for COMP0004
+## Notes Management Web Application
+
+This notes management web application is mainly designed for users to view and edit collections of notes.

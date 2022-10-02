@@ -4,45 +4,43 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/newNote.html")
-public class CreateNewNoteServlet extends MyAbstractServlet
-{
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException
-  {
-    String noteName;
-    if ((noteName = request.getParameter("noteName")) != null)
-    {
-      String content;
+@WebServlet("/newNoteServlet")
+public class CreateNewNoteServlet extends BaseServlet {
 
-      // guarantee the name of each note is unique
-      if (model.noteReader.getIndexNamesInOrderAdded().contains(noteName))
-      {
-        request.getSession().setAttribute("msg", "Note [" + noteName + "] has already existed. Please change a name.");
-        request.getRequestDispatcher("/errorPage.jsp").forward(request, response);
-        return;
-      }
-
-      // display name and content in the text area after saving the note
-      if ((content = request.getParameter("noteContent")) != null)
-      {
-        File file = new File(model.getPath(noteName));
-        model.noteEditor.writeTextFile(file, content);
-
-        request.getSession().setAttribute("newIndex", noteName);
-        List<String> contents = model.noteReader.readTextFile(file);
-        request.setAttribute(noteName, contents);
-      }
-
-    }
-    else
-    {
-      request.getSession().setAttribute("newIndex", "");
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
     }
 
-    doDispatch(request, response, "/newNote.jsp");
-  }
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String noteName;
+        if ((noteName = request.getParameter("noteName")) != null) {
+            String content;
+
+            // Guarantee the name of each note is unique
+            if (model.getIndexNamesInOrderAdded().contains(noteName)) {
+                request.getSession().setAttribute("msg", "Note [" + noteName + "] has already existed. Please change a name.");
+                request.getRequestDispatcher("/pages/note/errorPage.jsp").forward(request, response);
+                return;
+            }
+
+            // Display name and content in the text area after saving the note
+            if ((content = request.getParameter("noteContent")) != null) {
+                model.writeTextFile(noteName, content);
+
+                request.getSession().setAttribute("newIndex", noteName);
+                List<String> contents = model.readTextFile(noteName);
+                request.setAttribute(noteName, contents);
+            }
+
+        } else {
+            request.getSession().setAttribute("newIndex", "");
+        }
+
+        request.getRequestDispatcher("/pages/note/newNote.jsp").forward(request, response);
+    }
 }

@@ -3,7 +3,7 @@
 
 <html>
 <head>
-    <jsp:include page="./meta.jsp"/>
+    <jsp:include page="../common/meta.jsp"/>
     <title>Notes Manager App</title>
     <style>
         .main {
@@ -66,7 +66,7 @@
     </style>
 </head>
 <body>
-    <jsp:include page="/header.jsp"/>
+    <jsp:include page="/pages/common/header.jsp"/>
     <div class="main">
         <div class="sidebar">
             <h2>Notes List:</h2>
@@ -92,32 +92,32 @@
             <div>
                 <ul class="opBar">
                     <li>
-                        <form action="newNoteServlet">
+                        <form action="newNoteServlet" method="post">
                             <button type="submit" name="op" value="create"> New Note </button>
                         </form>
                     </li>
                     <li>
-                        <form action="modifyNoteServlet">
+                        <form action="modifyNoteServlet" method="post">
                             <button type="submit" name="op" value="modify"> Modify </button>
                         </form>
                     </li>
                     <li>
-                        <form action="deleteNoteServlet">
+                        <form action="deleteNoteServlet" method="post">
                             <button type="submit" name="op" value="delete"> Delete </button>
                         </form>
                     </li>
                     <li>
-                        <form action="renameNoteServlet">
+                        <form action="renameNoteServlet" method="post">
                             <button type="submit" name="op" value="rename"> Rename </button>
                         </form>
                     </li>
                     <li>
-                        <form action="searchServlet">
+                        <form action="searchServlet" method="post">
                             <button type="submit" name="op" value="search"> Search </button>
                         </form>
                     </li>
                     <li>
-                        <form action="index.html">
+                        <form action="../../index.jsp">
                             <button type="submit" name="op" value="home"> Home Page </button>
                         </form>
                     </li>

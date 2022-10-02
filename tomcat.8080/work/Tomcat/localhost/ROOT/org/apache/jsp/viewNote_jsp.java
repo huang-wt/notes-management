@@ -242,12 +242,12 @@ public final class viewNote_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("          </form>\n");
       out.write("        </li>\n");
       out.write("        <li>\n");
-      out.write("          <form action=\"search.html\">\n");
+      out.write("          <form action=\"search.jsp\">\n");
       out.write("            <button type=\"submit\" name=\"op\" value=\"search\"> Search </button>\n");
       out.write("          </form>\n");
       out.write("        </li>\n");
       out.write("        <li>\n");
-      out.write("          <form action=\"index.html\">\n");
+      out.write("          <form action=\"index.jsp\">\n");
       out.write("            <button type=\"submit\" name=\"op\" value=\"home\"> Home Page </button>\n");
       out.write("          </form>\n");
       out.write("        </li>\n");

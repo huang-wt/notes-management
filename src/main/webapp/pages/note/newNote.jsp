@@ -3,19 +3,19 @@
 
 <html>
 <head>
-    <jsp:include page="/meta.jsp"/>
+    <jsp:include page="/pages/common/meta.jsp"/>
     <title>Notes Manager App</title>
 </head>
 <body>
-    <jsp:include page="/header.jsp"/>
+    <jsp:include page="/pages/common/header.jsp"/>
     <div>
         <h2>Create New Note</h2>
         <form action="/newNoteServlet" method="post">
             <label for="noteName">Name the note: </label>
             <%
-                String noteName;
-                if ((noteName = (String) request.getSession().getAttribute("newIndex")) != null)
-                { %>
+            String noteName;
+            if ((noteName = (String) request.getSession().getAttribute("newIndex")) != null)
+            { %>
             <input type="text" name="noteName" id="noteName" value="<%=noteName%>"> <br> <br>
             <% }
             else
@@ -24,14 +24,14 @@
             <% } %>
             <textarea name="noteContent" rows="30" cols="100">
             <%List<String> contents;
-                if (noteName != null && !"".equals(noteName) && (contents = (List<String>) request.getAttribute(noteName)) != null)
-                {for (String line : contents)
-                { %><%=line%>
+            if (noteName != null && !"".equals(noteName) && (contents = (List<String>) request.getAttribute(noteName)) != null)
+            {for (String line : contents)
+            { %><%=line%>
             <% } } %>
             </textarea> <br> <br>
             <input type="submit" value="Save">
         </form>
-        <form action="viewNoteServlet">
+        <form action="viewNoteServlet" method="post">
             <input type="submit" value="Back">
         </form>
     </div>
